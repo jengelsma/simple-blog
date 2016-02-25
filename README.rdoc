@@ -1,0 +1,14 @@
+Testing requirements for posts:
+
+title: string
+article: text
+likes: integer
+status: enum - published, unpublished
+
+- title must be present
+- title must be between 5 and 80 characters
+- article must be present
+- article must be between 20 and 600 characters
+- likes must be positive
+- status must be valid
+

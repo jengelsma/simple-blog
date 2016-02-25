@@ -1,0 +1,46 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :article %><br>
+    <%= f.text_area :article %>
+  </div>
+
+  <div class="field">
+    <%= f.label :author_id %><br>
+    <%= f.select :author_id, 
+        options_for_select(Author.all.collect {|a| ["#{a.lname},
+        #{a.fname}", a.id]}, 
+        selected: (@post.author ? @post.author.id : Author.first.id)),
+        {} %>
+</div>
+
+
+  <div class="field">
+    <%= f.label :likes %><br>
+    <%= f.number_field :likes %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select :status, options_for_select(@statuses.collect {|s| [s[0].humanize, s[0]]},
+selected: @post.status), {} %>
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
