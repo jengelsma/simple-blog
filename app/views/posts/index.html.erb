@@ -1,35 +1,25 @@
+<% if notice %>
 <p id="notice"><%= notice %></p>
+<% end %>
 
-<h1>Listing Posts</h1>
+<h1>Recent Postings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Article</th>
-      <th>Author</th>
-      <th>Likes</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.article %></td>
-        <td><%= (post.author.try(:lname) || "NA") %></td>
-        <td><%= post.likes %></td>
-        <td><%= post.status %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="article">
+      <div class="article_title"> <%= post.title %> </div>
+      <div class="article_info">
+       <span class="date"> <%= post.updated_at.to_formatted_s(:long_ordinal) %> </span>
+        <span class="author"> By <%=  (post.author.try(:full_name) || "NA") %> </span>
+      </div>
+      <div class="article_text"> <%= post.article %> </div>
+      <div class="actions">
+        <%= link_to 'Show', post %>
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
 
-<br>
-
+<span class="btn">
 <%= link_to 'New Post', new_post_path %>
+</span>

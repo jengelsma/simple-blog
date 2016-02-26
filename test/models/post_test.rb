@@ -64,4 +64,8 @@ class PostTest < ActiveSupport::TestCase
 		end
 	end
 
+	test "status must default to unpublished" do
+		assert_equal @post.status, "unpublished"
+	end
+
 end
