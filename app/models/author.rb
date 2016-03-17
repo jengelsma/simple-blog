@@ -10,5 +10,8 @@ class Author < ActiveRecord::Base
 				message: 'must be a URL for GIF, JPG or PNG image.'}
 
 
+	def full_name
+		"#{self.fname} #{self.lname}"
+	end
 
 end

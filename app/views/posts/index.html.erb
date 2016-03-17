@@ -4,22 +4,15 @@
 
 <h1>Recent Postings</h1>
 
-    <% @posts.each do |post| %>
-    <div class="article">
-      <div class="article_title"> <%= post.title %> </div>
-      <div class="article_info">
-       <span class="date"> <%= post.updated_at.to_formatted_s(:long_ordinal) %> </span>
-        <span class="author"> By <%=  (post.author.try(:full_name) || "NA") %> </span>
-      </div>
-      <div class="article_text"> <%= post.article %> </div>
-      <div class="actions">
-        <%= link_to 'Show', post %>
-        <%= link_to 'Edit', edit_post_path(post) %>
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-    </div>
-    <% end %>
-
 <span class="btn">
-<%= link_to 'New Post', new_post_path %>
+<%= link_to 'New Post', new_post_path, remote: true %>
 </span>
+
+<div id="posts">
+    <%= render @posts %>
+</div>
+
+<div id="blog-form" style="display:none;"></div>
+
+
+

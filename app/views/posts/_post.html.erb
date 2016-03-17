@@ -1,0 +1,18 @@
+  <% if post == @current_post %>
+      <div id="current_post" class="article">
+    <% else %>
+      <div class="article">
+    <% end %>
+
+      <div class="article_title"> <%= post.title %> </div>
+      <div class="article_info">
+       <span class="date"> <%= post.updated_at.to_formatted_s(:long_ordinal) %> </span>
+        <span class="author"> By <%=  (post.author.try(:full_name) || "NA") %> </span>
+      </div>
+      <div class="article_text"> <%= post.article %> </div>
+      <div class="actions">
+        <%= link_to 'Show', post %>
+        <%= link_to 'Edit', edit_post_path(post), remote: true %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+      </div>
+    </div>
