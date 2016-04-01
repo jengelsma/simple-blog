@@ -44,5 +44,7 @@ selected: @post.status), {} %>
   </div>
   <div class="actions" id="submitbutton">
     <%= f.submit %>
+    <%= f.submit "Cancel", :name => "cancel" %>
+
   </div>
 <% end %>

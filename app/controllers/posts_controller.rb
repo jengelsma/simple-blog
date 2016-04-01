@@ -28,15 +28,27 @@ class PostsController < ApplicationController
   def edit
   end
 
-  # POST /posts
-  # POST /posts.json
-  def create
-    @post = Post.new(post_params)
-    author = Author.find(post_params[:author_id])
-    @post.build_author(:id  => author.id) 
-    @post.save!
-    @current_post = @post
-  end
+ # POST /posts
+# POST /posts.json
+def create
+    if params[:cancel] == "Cancel"
+        respond_to do |format|
+            format.js { render action: 'cancel'}
+        end
+    else
+        @post = Post.new(post_params)
+        author = Author.find(post_params[:author_id])
+        @post.build_author(:id  => author.id) 
+        if @post.save 
+            @current_post = @post
+        else
+            respond_to do |format|
+                format.js { render action: 'new' }
+            end
+        end
+    end
+end
+
 
   # def create
   #   @post = Post.new(post_params)
@@ -56,9 +68,20 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
-  def update
-    @post.update!(post_params)
-  end
+def update
+    if params[:cancel] == "Cancel"
+        respond_to do |format|
+            format.js { render action: 'cancel'}
+        end
+    else
+        if !@post.update(post_params)
+            respond_to do |format|
+                format.js {render action: 'edit' }
+            end
+        end
+    end
+end
+
 
   # def update
   #   respond_to do |format|

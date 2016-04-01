@@ -1,5 +1,5 @@
 $('#blog-form').html("<%= j (render 'form') %>");
-$('#blog-form').slideDown(0);
+$('#blog-form').slideDown(350);
 setTimeout(function(){ 
 	if((obj = document.getElementById("submitbutton")) && obj != null){
     window.scrollTo(0, obj.offsetTop);
