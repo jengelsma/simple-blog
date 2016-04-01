@@ -4,9 +4,10 @@
 
 <h1>Recent Postings</h1>
 
-<span class="btn">
-<%= link_to 'New Post', new_post_path, remote: true %>
+<span class="new_btn">
+    <%= link_to 'New Post', new_post_path, remote: true, class: "btn btn-danger" %>
 </span>
+
 
 <div id="posts">
     <%= render @posts %>
